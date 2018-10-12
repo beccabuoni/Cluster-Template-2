@@ -36,11 +36,12 @@ for i in range( params.n ):
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
-    node.addService(pg.Execute(shell="sh", command="sleep 5m && sudo /local/repository/ssh_setup.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo su BW840606 -c 'cp /local/repository/source/* /users/BW840606'"))
+    node.addService(pg.Execute(shell="sh", command="sleep 5m && sudo -H -u BW840606 bash -c '/local/repository/ssh_setup.sh'"))
+    node.addService(pg.Execute(shell="sh", command="sudo su BW840606 -c 'cp /local/repository/source/* /mnt/scratch/'"))
     node.routable_control_ip = "true"
   elif i == 1:
     node = request.XenVM("metadata")
+    node.addService(pg.Execute(shell="sh", command="sleep 5m && sudo -H -u BW840606 bash -c '/local/repository/ssh_setup.sh'"))
   elif i == 2:
     node = request.XenVM("storage")
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/setup_firewall.sh"))
@@ -50,8 +51,8 @@ for i in range( params.n ):
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
-    node.addService(pg.Execute(shell="sh", command="sleep 5m && sudo /local/repository/ssh_setup.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo su BW840606 -c 'cp /local/repository/source/* /users/BW840606'"))
+    node.addService(pg.Execute(shell="sh", command="sleep 5m && sudo -H -u BW840606 bash -c '/local/repository/ssh_setup.sh'"))
+    #node.addService(pg.Execute(shell="sh", command="sudo su BW840606 -c 'cp /local/repository/source/* /users/BW840606'"))
   else:
     node = request.XenVM("compute-" + str(i-2))
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_NFS_client.sh"))
@@ -63,8 +64,8 @@ for i in range( params.n ):
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
-    node.addService(pg.Execute(shell="sh", command="sleep 5m && sudo /local/repository/ssh_setup.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo su BW840606 -c 'cp /local/repository/source/* /users/BW840606'"))
+    node.addService(pg.Execute(shell="sh", command="sleep 5m && sudo -H -u BW840606 bash -c '/local/repository/ssh_setup.sh'"))
+    #node.addService(pg.Execute(shell="sh", command="sudo su BW840606 -c 'cp /local/repository/source/* /users/BW840606'"))
     node.cores = 2
     node.ram = 4096
     
